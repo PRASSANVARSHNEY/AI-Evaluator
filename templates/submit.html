@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Answer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        async function checkAnswer() {
+            const questionId = document.getElementById('question_id').value;
+            const studentAnswer = document.getElementById('student_answer').value;
+            const response = await fetch('/check_answer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `question_id=${questionId}&student_answer=${studentAnswer}`
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = 
+                `Result: ${result.result}, Similarity: ${result.similarity}`;
+        }
+    </script>
+</head>
+<body>
+    <h2>Submit Your Answer</h2>
+    <label for="question_id">Select Question:</label>
+    <select id="question_id">
+        {% for question in questions %}
+        <option value="{{ question._id }}">{{ question.question }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="student_answer">Your Answer:</label>
+    <textarea id="student_answer" required></textarea>
+
+    <button onclick="checkAnswer()">Check Answer</button>
+
+    <div id="result"></div>
+</body>
+</html>

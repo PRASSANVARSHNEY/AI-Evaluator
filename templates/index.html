@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question Checker - Create Question</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Create a New Question</h2>
+    <form action="/create_question" method="POST">
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question" required>
+        
+        <label for="model_answer">Model Answer:</label>
+        <textarea id="model_answer" name="model_answer" required></textarea>
+        
+        <button type="submit">Add Question</button>
+    </form>
+    <a href="{{ url_for('submit_page') }}">Go to Answer Submission</a>
+</body>
+</html>

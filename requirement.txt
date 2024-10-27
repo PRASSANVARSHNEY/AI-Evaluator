@@ -1,0 +1,4 @@
+Flask
+transformers
+sentence-transformers
+pymongo
