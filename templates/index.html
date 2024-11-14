@@ -16,6 +16,12 @@
         
         <button type="submit">Add Question</button>
     </form>
+
+    <!-- Reset Button -->
+    <form action="/reset_questions" method="POST" style="margin-top: 20px;">
+        <button type="submit" style="background-color: red; color: white;">Reset All Questions</button>
+    </form>
+
     <a href="{{ url_for('submit_page') }}">Go to Answer Submission</a>
 </body>
 </html>

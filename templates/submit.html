@@ -10,8 +10,8 @@
             const studentAnswer = document.getElementById('student_answer').value;
             const response = await fetch('/check_answer', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `question_id=${questionId}&student_answer=${studentAnswer}`
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question_id: questionId, student_answer: studentAnswer })
             });
             const result = await response.json();
             document.getElementById('result').innerText = 
@@ -24,14 +24,14 @@
     <label for="question_id">Select Question:</label>
     <select id="question_id">
         {% for question in questions %}
-        <option value="{{ question._id }}">{{ question.question }}</option>
+        <option value="{{ question['_id'] }}">{{ question['question'] }}</option>
         {% endfor %}
     </select>
 
     <label for="student_answer">Your Answer:</label>
     <textarea id="student_answer" required></textarea>
 
-    <button onclick="checkAnswer()">Check Answer</button>
+    <button type="button" onclick="checkAnswer()">Check Answer</button>
 
     <div id="result"></div>
 </body>
